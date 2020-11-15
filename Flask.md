@@ -1,3 +1,152 @@
+## Create virtual env
+
+On windows
+
+```powershell
+py -3 -m venv venv # create virtual environment in folder venv
+.\venv\Scripts\activate # activate the virtual environment
+# or if you use power shell
+.\venv\Script\Activate.ps1
+
+pip --version
+pip3 --version
+
+pip3 install flask
+pip3 list
+
+```
+
+On linux
+
+```shell
+# you may need to install python-env
+sudo apt-get install python3-env
+python3 -m venv venv
+sudo apt-get install tree # to view the file structure 
+tree venv -L 3 # view 3 levels file tree
+chmod 744 ./ven/bin/active # change permisson to excute
+. /venv/bin/activate # activate the environment
+```
+
+
+
+```python
+# create the app python file as server.py
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return "Hello world"
+```
+
+### run flask
+
+On Linux
+
+```shell
+$ export FLASK_APP=hello.py
+# make suer you pwd is in project foler
+flask run
+```
+
+
+
+on Windows
+
+```powershell
+$env:FLASK_APP = "server.py"
+flask run
+```
+
+### debug mode
+
+when debug mode is on, no need to stop and restart the server each time you make some changes
+
+```shell
+export FLASK_ENV=development
+```
+
+### render_template
+
+flask will look for the folder named templates 
+
+```python
+@app.route('/')
+def hello_world():
+    return render_template('index.html') # 
+```
+
+### static files
+
+flask store the static files in static folder
+
+### favicon
+
+if static has sub folder, we can refer the file like 
+
+```python
+url_for('static', filename='subfolder/favicon.ico')
+```
+
+
+
+```html
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"
+```
+
+### Variable Rules
+
+```python
+@app.route('/user/<username>')
+def show_user_profile(username):
+    return 'User %s' % escape(username)
+
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    return 'Post %d' % post_id
+
+@app.route('/path/<path:subpath>')
+def show_subpath(subpath):
+    return 'Subpath %s' % escape(subpath)
+```
+
+| Data type | comments                                   |      |
+| --------- | ------------------------------------------ | ---- |
+| string    | (default) accepts any text without a slash |      |
+| int       | accepts positive integers                  |      |
+| float     | accepts positive floating point values     |      |
+| path      | like string but also accepts slashes       |      |
+| uuid      | accepts UUID strings                       |      |
+
+### Form
+
+```python
+from flask import request
+@app.route('/submit_form', methods=['POST', 'GET'])
+def submit_form():
+    if request.method == 'POST':
+        data = request.form.to_dict() # transfer the data to dictionary
+        print(data)
+        return 'form submitted'
+   	else:
+        return 'something went wrong, try again'
+```
+
+### redirect
+
+```python
+from flask import redirect
+@app.route('/submit_form', methods=['POST', 'GET'])
+def submit_form():
+    if request.method == 'POST':
+        data = request.form.to_dict() 
+        print(data)
+        return redirect('/thankyou.html') # redirect to new page
+```
+
+
+
 ### create APP
 
 ```python
