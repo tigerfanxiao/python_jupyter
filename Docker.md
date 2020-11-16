@@ -1,6 +1,6 @@
 # Container
 
-containers are isolated execution environment that let us quickly and efficiently deploy exact copies of our desired environments. This is done by virtualizing at the operating system-level and isolating any libraries and applications within the container.
+Containers are isolated execution environment that let us quickly and efficiently deploy exact copies of our desired environments. This is done by virtualizing at the operating system-level and isolating any libraries and applications within the container.
 
 **Bare Metal**: No virtualization - the application or service is deployed directly onto the machine
 
@@ -226,3 +226,4 @@ DevOps
 • DevOps Essentials 
 
 • Implementing a Full CI/CD Pipeline
+
