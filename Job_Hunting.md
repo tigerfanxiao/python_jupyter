@@ -254,6 +254,10 @@ You website or any public profile link
 
 
 
+# 学习方法实操
+
+1.先写文字笔记, 然后电子化
+
 # Efficiency
 
 ## Chrome
