@@ -1,27 +1,101 @@
 # AlgoExpert
 
-| Question                   | Category            | Level  | Comments          | Date       |
-| -------------------------- | ------------------- | ------ | ----------------- | ---------- |
-| Two Number Sum             | Arrays              | Easy   |                   | 10/10/2020 |
-| Validate Subsequence       | Arrays              | Easy   |                   | 10/10/2020 |
-| Three Number Sum           | Arrays              | Easy   |                   | 10/10/2020 |
-| Smallest Difference        | Arrays              | Easy   |                   | 10/10/2020 |
-| Move Element To End        | Arrays              | Easy   |                   | 10/10/2020 |
-| Monontonic Array           | Arrays              | Easy   |                   | 10/10/2020 |
-| Spiral Traverse            | Arrays              | Easy   |                   | 10/10/2020 |
-| Max Subset Sum No Adjacent | Dynamic Programming | Medium |                   | 10/10/2020 |
-| Deptch-first search        | Graphs              | Easy   |                   | 10/10/2020 |
-| Binary Search              | Searching           | Easy   |                   | 10/10/2020 |
-| Bubble Sort                | Sorting             | Easy   |                   | 10/10/2020 |
-| Insertion Sort             | Sorting             | Easy   |                   | 10/10/2020 |
-| Selection Sort             | Sorting             | Easy   |                   | 10/10/2020 |
-| Palindrome Check           | Strings             | Easy   |                   | 10/10/2020 |
-| Caesar Cipher Encryptor    | Strings             | Easy   | need to see video | 11/16/2020 |
-| Find Three Largest Numbers | Searching           | Easy   | 未解出, 看视频    |            |
-| Run-Length Encoding        | String              | Easy   |                   |            |
-| Nth Fibonacci              | Recursion           | Easy   |                   |            |
-| Product Sum                | Recursion           | Easy   |                   |            |
-| Branch Sums                | Binary Trees        | Easy   |                   |            |
+| #    | Question                   | Category            | Level  | Comments          | Date       |
+| ---- | -------------------------- | ------------------- | ------ | ----------------- | ---------- |
+| 1    | Two Number Sum             | Arrays              | Easy   |                   | 10/10/2020 |
+| 2    | Validate Subsequence       | Arrays              | Easy   |                   | 10/10/2020 |
+| 3    | Three Number Sum           | Arrays              | Easy   |                   | 10/10/2020 |
+| 4    | Smallest Difference        | Arrays              | Easy   |                   | 10/10/2020 |
+| 5    | Move Element To End        | Arrays              | Easy   |                   | 10/10/2020 |
+| 6    | Monontonic Array           | Arrays              | Easy   |                   | 10/10/2020 |
+| 7    | Spiral Traverse            | Arrays              | Easy   |                   | 10/10/2020 |
+| 8    | Max Subset Sum No Adjacent | Dynamic Programming | Medium |                   | 10/10/2020 |
+| 9    | Depth-first search         | Graphs              | Easy   |                   | 10/10/2020 |
+| 10   | Binary Search              | Searching           | Easy   | 还没看视频        | 10/10/2020 |
+| 11   | Bubble Sort                | Sorting             | Easy   | 还没看视频        | 10/10/2020 |
+| 12   | Insertion Sort             | Sorting             | Easy   |                   | 10/10/2020 |
+| 13   | Selection Sort             | Sorting             | Easy   |                   | 10/10/2020 |
+| 14   | Palindrome Check           | Strings             | Easy   | 还没看视频        | 10/10/2020 |
+| 15   | Caesar Cipher Encryptor    | Strings             | Easy   | need to see video | 11/16/2020 |
+| 16   | Find Three Largest Numbers | Searching           | Easy   | 未解出, 看视频    | 11/16/2020 |
+| 17   | Run-Length Encoding        | String              | Easy   | 还没看视频        | 11/16/2020 |
+| 18   | Nth Fibonacci              | Recursion           | Easy   | 还没看视频        | 11/16/2020 |
+| 19   | Product Sum                | Recursion           | Easy   | 没解出, 看视频    | 11/16/2020 |
+| 20   | Branch Sums                | Binary Trees        | Easy   | 没解出, 看视频    | 11/16/2020 |
+| 21   | Quick Sort                 | Sorting             | Hard   |                   |            |
+| 22   | Three Number Sort          | Sorting             | Medium |                   |            |
+
+
+
+### Depth First Search
+
+```python
+# Feel free to add new properties
+# and methods to the class.
+class Node:
+    def __init__(self, name):
+        self.children = []
+        self.name = name
+
+    def addChild(self, name):
+        self.children.append(Node(name))
+        return self
+
+    def depthFirstSearch(self, array):
+        # Write your code here.
+        array.append(self.name)
+		for child in self.children:
+			child.depthFirstSearch(array)
+		return array
+```
+
+```
+graph = A
+	/   |  \
+   B    C    D
+   
+```
+
+
+
+```python
+{
+  "graph": {
+    "nodes": [
+      {"children": ["B", "C", "D"], "id": "A", "value": "A"},
+      {"children": ["E", "F"], "id": "B", "value": "B"},
+      {"children": [], "id": "C", "value": "C"},
+      {"children": ["G", "H"], "id": "D", "value": "D"},
+      {"children": [], "id": "E", "value": "E"},
+      {"children": ["I", "J"], "id": "F", "value": "F"},
+      {"children": ["K"], "id": "G", "value": "G"},
+      {"children": [], "id": "H", "value": "H"},
+      {"children": [], "id": "I", "value": "I"},
+      {"children": [], "id": "J", "value": "J"},
+      {"children": [], "id": "K", "value": "K"}
+    ],
+    "startNode": "A"
+  }
+}
+```
+
+
+
+```python
+
+import program
+import unittest
+class TestProgram(unittest.TestCase):
+    def test_case_1(self):
+        graph = program.Node("A")
+        graph.addChild("B").addChild("C").addChild("D")
+        graph.children[0].addChild("E").addChild("F")
+        graph.children[2].addChild("G").addChild("H")
+        graph.children[0].children[1].addChild("I").addChild("J")
+        graph.children[2].children[0].addChild("K")
+        self.assertEqual(graph.depthFirstSearch([]), ["A", "B", "E", "F", "I", "J", "C", "D", "G", "K", "H"])
+
+```
 
 
 
