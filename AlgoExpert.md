@@ -7,23 +7,32 @@
 | 3    | Three Number Sum           | Arrays              | Easy   |                   | 10/10/2020 |
 | 4    | Smallest Difference        | Arrays              | Easy   |                   | 10/10/2020 |
 | 5    | Move Element To End        | Arrays              | Easy   |                   | 10/10/2020 |
-| 6    | Monontonic Array           | Arrays              | Easy   |                   | 10/10/2020 |
+| 6    | Monotonic Array            | Arrays              | Easy   |                   | 10/10/2020 |
 | 7    | Spiral Traverse            | Arrays              | Easy   |                   | 10/10/2020 |
 | 8    | Max Subset Sum No Adjacent | Dynamic Programming | Medium |                   | 10/10/2020 |
 | 9    | Depth-first search         | Graphs              | Easy   |                   | 10/10/2020 |
-| 10   | Binary Search              | Searching           | Easy   | 还没看视频        | 10/10/2020 |
-| 11   | Bubble Sort                | Sorting             | Easy   | 还没看视频        | 10/10/2020 |
+| 10   | Binary Search              | Searching           | Easy   | 需要看视频        | 10/10/2020 |
+| 11   | Bubble Sort                | Sorting             | Easy   | 需要看视频        | 10/10/2020 |
 | 12   | Insertion Sort             | Sorting             | Easy   |                   | 10/10/2020 |
 | 13   | Selection Sort             | Sorting             | Easy   |                   | 10/10/2020 |
-| 14   | Palindrome Check           | Strings             | Easy   | 还没看视频        | 10/10/2020 |
+| 14   | Palindrome Check           | Strings             | Easy   | 需要看视频        | 10/10/2020 |
 | 15   | Caesar Cipher Encryptor    | Strings             | Easy   | need to see video | 11/16/2020 |
 | 16   | Find Three Largest Numbers | Searching           | Easy   | 未解出, 看视频    | 11/16/2020 |
-| 17   | Run-Length Encoding        | String              | Easy   | 还没看视频        | 11/16/2020 |
-| 18   | Nth Fibonacci              | Recursion           | Easy   | 还没看视频        | 11/16/2020 |
+| 17   | Run-Length Encoding        | String              | Easy   | 需要看视频        | 11/16/2020 |
+| 18   | Nth Fibonacci              | Recursion           | Easy   | 需要看视频        | 11/16/2020 |
 | 19   | Product Sum                | Recursion           | Easy   | 没解出, 看视频    | 11/16/2020 |
 | 20   | Branch Sums                | Binary Trees        | Easy   | 没解出, 看视频    | 11/16/2020 |
 | 21   | Quick Sort                 | Sorting             | Hard   |                   |            |
-| 22   | Three Number Sort          | Sorting             | Medium |                   |            |
+| 22   | Three Number Sort          | Sorting             | Medium | 需要看视频        | 11/17/2020 |
+| 23   | Node Depths                | Binary Trees        | Easy   |                   |            |
+| 24   | Find Closest Value in BST  | Binary Search Trees | Easy   |                   |            |
+| 25   | Longest Peak               | Arrays              | Medium |                   |            |
+| 26   | Array of Products          | Arrays              | Medium |                   |            |
+| 27   | Heap Sort                  | Sorting             | Medium |                   |            |
+| 28   | Search In Sorted Matrix    | Searching           | Medium |                   |            |
+|      |                            |                     |        |                   |            |
+|      |                            |                     |        |                   |            |
+|      |                            |                     |        |                   |            |
 
 
 
