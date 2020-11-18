@@ -22,9 +22,9 @@
 | 18   | Nth Fibonacci              | Recursion           | Easy   | 需要看视频        | 11/16/2020 |
 | 19   | Product Sum                | Recursion           | Easy   | 没解出, 看视频    | 11/16/2020 |
 | 20   | Branch Sums                | Binary Trees        | Easy   | 没解出, 看视频    | 11/16/2020 |
-| 21   | Quick Sort                 | Sorting             | Hard   |                   |            |
+| 21   | Quick Sort                 | Sorting             | Hard   | 没解出, 看视频    | 11/17/2020 |
 | 22   | Three Number Sort          | Sorting             | Medium | 需要看视频        | 11/17/2020 |
-| 23   | Node Depths                | Binary Trees        | Easy   |                   |            |
+| 23   | Node Depths                | Binary Trees        | Easy   | 需要看视频        | 11/17/2020 |
 | 24   | Find Closest Value in BST  | Binary Search Trees | Easy   |                   |            |
 | 25   | Longest Peak               | Arrays              | Medium |                   |            |
 | 26   | Array of Products          | Arrays              | Medium |                   |            |
