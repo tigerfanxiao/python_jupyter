@@ -25,14 +25,14 @@
 | 21   | Quick Sort                 | Sorting             | Hard   | 没解出, 看视频    | 11/17/2020 |
 | 22   | Three Number Sort          | Sorting             | Medium | 需要看视频        | 11/17/2020 |
 | 23   | Node Depths                | Binary Trees        | Easy   | 需要看视频        | 11/17/2020 |
-| 24   | Find Closest Value in BST  | Binary Search Trees | Easy   |                   |            |
+| 24   | Find Closest Value in BST  | Binary Search Trees | Easy   | 没解出, 看视频    | 11/19/2020 |
 | 25   | Longest Peak               | Arrays              | Medium |                   |            |
 | 26   | Array of Products          | Arrays              | Medium |                   |            |
 | 27   | Heap Sort                  | Sorting             | Medium |                   |            |
 | 28   | Search In Sorted Matrix    | Searching           | Medium |                   |            |
-|      |                            |                     |        |                   |            |
-|      |                            |                     |        |                   |            |
-|      |                            |                     |        |                   |            |
+| 29   | BST Construction           | Binary Search Trees | Medium |                   |            |
+| 30   | Linked List Construction   | Linked List         | Medium |                   |            |
+| 31   | Min Heap Construction      | Heaps               | Medium |                   |            |
 
 
 
