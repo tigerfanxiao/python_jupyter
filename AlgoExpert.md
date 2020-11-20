@@ -1,38 +1,40 @@
 # AlgoExpert
 
-| #    | Question                   | Category            | Level  | Comments          | Date       |
-| ---- | -------------------------- | ------------------- | ------ | ----------------- | ---------- |
-| 1    | Two Number Sum             | Arrays              | Easy   |                   | 10/10/2020 |
-| 2    | Validate Subsequence       | Arrays              | Easy   |                   | 10/10/2020 |
-| 3    | Three Number Sum           | Arrays              | Easy   |                   | 10/10/2020 |
-| 4    | Smallest Difference        | Arrays              | Easy   |                   | 10/10/2020 |
-| 5    | Move Element To End        | Arrays              | Easy   |                   | 10/10/2020 |
-| 6    | Monotonic Array            | Arrays              | Easy   |                   | 10/10/2020 |
-| 7    | Spiral Traverse            | Arrays              | Easy   |                   | 10/10/2020 |
-| 8    | Max Subset Sum No Adjacent | Dynamic Programming | Medium |                   | 10/10/2020 |
-| 9    | Depth-first search         | Graphs              | Easy   |                   | 10/10/2020 |
-| 10   | Binary Search              | Searching           | Easy   | 需要看视频        | 10/10/2020 |
-| 11   | Bubble Sort                | Sorting             | Easy   | 需要看视频        | 10/10/2020 |
-| 12   | Insertion Sort             | Sorting             | Easy   |                   | 10/10/2020 |
-| 13   | Selection Sort             | Sorting             | Easy   |                   | 10/10/2020 |
-| 14   | Palindrome Check           | Strings             | Easy   | 需要看视频        | 10/10/2020 |
-| 15   | Caesar Cipher Encryptor    | Strings             | Easy   | need to see video | 11/16/2020 |
-| 16   | Find Three Largest Numbers | Searching           | Easy   | 未解出, 看视频    | 11/16/2020 |
-| 17   | Run-Length Encoding        | String              | Easy   | 需要看视频        | 11/16/2020 |
-| 18   | Nth Fibonacci              | Recursion           | Easy   | 需要看视频        | 11/16/2020 |
-| 19   | Product Sum                | Recursion           | Easy   | 没解出, 看视频    | 11/16/2020 |
-| 20   | Branch Sums                | Binary Trees        | Easy   | 没解出, 看视频    | 11/16/2020 |
-| 21   | Quick Sort                 | Sorting             | Hard   | 没解出, 看视频    | 11/17/2020 |
-| 22   | Three Number Sort          | Sorting             | Medium | 需要看视频        | 11/17/2020 |
-| 23   | Node Depths                | Binary Trees        | Easy   | 需要看视频        | 11/17/2020 |
-| 24   | Find Closest Value in BST  | Binary Search Trees | Easy   | 没解出, 看视频    | 11/19/2020 |
-| 25   | Longest Peak               | Arrays              | Medium |                   |            |
-| 26   | Array of Products          | Arrays              | Medium |                   |            |
-| 27   | Heap Sort                  | Sorting             | Medium |                   |            |
-| 28   | Search In Sorted Matrix    | Searching           | Medium |                   |            |
-| 29   | BST Construction           | Binary Search Trees | Medium |                   |            |
-| 30   | Linked List Construction   | Linked List         | Medium |                   |            |
-| 31   | Min Heap Construction      | Heaps               | Medium |                   |            |
+| #    | Question                   | Category            | Level     | Comments                   | Date       |
+| ---- | -------------------------- | ------------------- | --------- | -------------------------- | ---------- |
+| 1    | Two Number Sum             | Arrays              | Easy      |                            | 10/10/2020 |
+| 2    | Validate Subsequence       | Arrays              | Easy      |                            | 10/10/2020 |
+| 3    | Three Number Sum           | Arrays              | Easy      |                            | 10/10/2020 |
+| 4    | Smallest Difference        | Arrays              | Easy      |                            | 10/10/2020 |
+| 5    | Move Element To End        | Arrays              | Easy      |                            | 10/10/2020 |
+| 6    | Monotonic Array            | Arrays              | Easy      |                            | 10/10/2020 |
+| 7    | Spiral Traverse            | Arrays              | Easy      |                            | 10/10/2020 |
+| 8    | Max Subset Sum No Adjacent | Dynamic Programming | Medium    |                            | 10/10/2020 |
+| 9    | Depth-first search         | Graphs              | Easy      |                            | 10/10/2020 |
+| 10   | Binary Search              | Searching           | Easy      | 需要看视频                 | 10/10/2020 |
+| 11   | Bubble Sort                | Sorting             | Easy      | 需要看视频                 | 10/10/2020 |
+| 12   | Insertion Sort             | Sorting             | Easy      |                            | 10/10/2020 |
+| 13   | Selection Sort             | Sorting             | Easy      |                            | 10/10/2020 |
+| 14   | Palindrome Check           | Strings             | Easy      | 需要看视频                 | 10/10/2020 |
+| 15   | Caesar Cipher Encryptor    | Strings             | Easy      | need to see video          | 11/16/2020 |
+| 16   | Find Three Largest Numbers | Searching           | Easy      | 未解出, 看视频             | 11/16/2020 |
+| 17   | Run-Length Encoding        | String              | Easy      | 需要看视频                 | 11/16/2020 |
+| 18   | Nth Fibonacci              | Recursion           | Easy      | 需要看视频                 | 11/16/2020 |
+| 19   | Product Sum                | Recursion           | Easy      | 没解出, 看视频             | 11/16/2020 |
+| 20   | Branch Sums                | Binary Trees        | Easy      | 没解出, 看视频             | 11/16/2020 |
+| 21   | Quick Sort                 | Sorting             | Hard      | 没解出, 看视频             | 11/17/2020 |
+| 22   | Three Number Sort          | Sorting             | Medium    | 需要看视频                 | 11/17/2020 |
+| 23   | Node Depths                | Binary Trees        | Easy      | 需要看视频                 | 11/17/2020 |
+| 24   | Find Closest Value in BST  | Binary Search Trees | Easy      | 没解出, 看视频             | 11/19/2020 |
+| 25   | Longest Peak               | Arrays              | Medium    | 没解出, 看视频             | 11/19/2020 |
+| 26   | Array of Products          | Arrays              | Medium    | 需要看视频                 | 11/19/2020 |
+| 27   | Heap Sort                  | Sorting             | Difficult |                            |            |
+| 28   | Search In Sorted Matrix    | Searching           | Medium    |                            |            |
+| 29   | BST Construction           | Binary Search Trees | Medium    | 需要看多次, 递归解法没有看 | 11/19/2020 |
+| 30   | Linked List Construction   | Linked List         | Medium    |                            |            |
+| 31   | Min Heap Construction      | Heaps               | Medium    | 没解出, 看视频             | 11/19/2020 |
+| 32   | Permutations               | Recursion           | Medium    |                            |            |
+| 33   | Powerset                   | Recursion           | Medium    | 没解出, 看视频             | 11/19/2020 |
 
 
 
@@ -170,3 +172,124 @@ A way to solve the problem by breaking it down into a collection of sub problems
    * 初始条件: 用转移方程算不出来, 需要手动定义的值
 
 4. 计算顺序: 一般是从小到大, 如果后面的结果, 基于先前计算的结果
+
+#  BST 二叉树
+
+## 概念和定义
+
+* 每一个节点只有左右两个子节点
+* 节点左侧的所有节点都比节点小, 节点右侧的所有节点都比节点大
+* 有定义推断: 最左侧的子节点是整个树最小的节点, 最右侧的子节点是整个树最大的节点
+
+```
+              10
+             /   \
+           5      15
+         /   \   /   \
+       2      5 13    22
+     /            \
+    1              14  
+```
+
+类定义
+
+```python
+class BST:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+```
+
+插入操作
+
+* 每一次迭代判断是插入左侧子树还是右侧子树, 都能略去一半的子节点. 故平均时间复杂度$O(logN
+  )$ 
+* 只有遇到当前节点是叶子节点时才做插入操作
+* 插入完成后就break循环
+* 如果遇到元素相同, 则往右侧子节点继续遍历
+
+```python
+def insert(self, value):
+   	currentNode = self
+    while True:
+        if value < currentNode.value:
+            if currentNode.left is None:
+                currentNode.left = BST(value)
+                break
+            else:
+                currentNode = currentNode.left
+        else:
+            if currentNode.right is None:
+                currentNode.right = BST(value)
+                break
+            else:
+            	currentNode = currentNode.right
+            current = current.right
+        
+            
+    return 
+```
+
+查找
+
+* 循环终止的条件 1: 当找到目标节点时 break
+* 循环终止条件2: 当遍历到叶子节点还是找不到
+
+```python
+def contain(self, value):
+    currentNode = self
+    while currentNode is Not None:
+        current 
+    
+    return False
+```
+
+
+
+## (Algo Export) BST Construction
+
+Write a BST class for a Binary Search Tree. The 
+
+# Heap
+
+min heap 
+
+* 当前节点的值小于或者等于其子节点
+
+* the root node is the smallest value of the heap
+
+* 节点index公式
+
+  ```
+  currentNode = i
+  childone = 2i + 1
+  childtwo = 2i + 2
+  
+  parentNode = floor((i-1)/2)
+  ```
+
+  
+
+```
+           8
+         /   \
+       12      23
+      /   \   /   \
+    17   31 30     44
+   /  \
+ 102   18
+ 
+```
+
+```python
+# siftup
+
+```
+
+
+
+max heap
+
+当前节点的值大于或者等于子节点
+
