@@ -211,11 +211,74 @@ def contain(self, value):
 
 Write a BST class for a Binary Search Tree. The 
 
+# Trees
+
+A Tree consists of a set of nodes (vertex) and a set of edges that connect pairs of nodes. A tree has following properties:
+
+- One node of the tree is designed as the root
+- Every node `n`, except the root node, is connected by an edge from exactly one other node p, where p is parent of n
+- A unique path traverse from the root to each node
+
+**Branch**
+
+- Any path in the tree that starts from the root node and ends at one of the bottom nodes in the tree
+
+### Complete Tree
+
+- Every single level filled up except the final level which may or may not be filled up, but the final level has nodes, they should be filled up left to right
+
+  ```
+  complete binary tree                       not complete binary tree
+   		20											 20
+   	   /   \                                            /
+   	 30     40                                        30
+      /   \                                            /
+    23     26                                        40
+                                                    /
+                                                  50  
+  ```
+
+  
+
+### Full Tree
+
+- Every node in the tree, either has no children nodes or `k` children nodes
+
+### Perfect Tree
+
+- All of the leaf node has the same depth
+
+### Binary Tree
+
+If each node in the tree has a maximum of two children, we say that the tree is a binary tree
+
+## Binary Search Trees
+
+
+
 # Heap
 
-min heap 
+* Heap is a complete, balanced binary tree
 
-* 当前节点的值小于或者等于其子节点
+* There are two types of heap trees: Min heap, Max heap
+
+  
+
+## Min Heap 
+
+* The value of parent node is less than or equal to either of its children
+
+  ```
+             8
+           /   \
+         12      23
+        /   \   /   \
+      17   31 30     44
+     /  \
+   102   18
+  ```
+
+  
 
 * the root node is the smallest value of the heap
 
@@ -231,17 +294,6 @@ min heap
 
   
 
-```
-           8
-         /   \
-       12      23
-      /   \   /   \
-    17   31 30     44
-   /  \
- 102   18
- 
-```
-
 ```python
 # siftup
 
@@ -249,9 +301,15 @@ min heap
 
 
 
-max heap
+## Max Heap
 
 当前节点的值大于或者等于子节点
+
+```
+[8,5,2,9,5,6,3] --> [9,8,6,5,5,2,3]
+```
+
+
 
 # Recursion
 
@@ -333,3 +391,7 @@ class DoublyLinkedList:
 def
 ```
 
+## Heap Sort
+
+1. Transform the array to the max heap
+2. 
