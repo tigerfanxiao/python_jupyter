@@ -1,43 +1,3 @@
-# AlgoExpert
-
-| #    | Question                   | Category            | Level     | Comments                   | Date       |
-| ---- | -------------------------- | ------------------- | --------- | -------------------------- | ---------- |
-| 1    | Two Number Sum             | Arrays              | Easy      |                            | 10/10/2020 |
-| 2    | Validate Subsequence       | Arrays              | Easy      |                            | 10/10/2020 |
-| 3    | Three Number Sum           | Arrays              | Easy      |                            | 10/10/2020 |
-| 4    | Smallest Difference        | Arrays              | Easy      |                            | 10/10/2020 |
-| 5    | Move Element To End        | Arrays              | Easy      |                            | 10/10/2020 |
-| 6    | Monotonic Array            | Arrays              | Easy      |                            | 10/10/2020 |
-| 7    | Spiral Traverse            | Arrays              | Easy      |                            | 10/10/2020 |
-| 8    | Max Subset Sum No Adjacent | Dynamic Programming | Medium    |                            | 10/10/2020 |
-| 9    | Depth-first search         | Graphs              | Easy      |                            | 10/10/2020 |
-| 10   | Binary Search              | Searching           | Easy      | 需要看视频                 | 10/10/2020 |
-| 11   | Bubble Sort                | Sorting             | Easy      | 需要看视频                 | 10/10/2020 |
-| 12   | Insertion Sort             | Sorting             | Easy      |                            | 10/10/2020 |
-| 13   | Selection Sort             | Sorting             | Easy      |                            | 10/10/2020 |
-| 14   | Palindrome Check           | Strings             | Easy      | 需要看视频                 | 10/10/2020 |
-| 15   | Caesar Cipher Encryptor    | Strings             | Easy      | need to see video          | 11/16/2020 |
-| 16   | Find Three Largest Numbers | Searching           | Easy      | 未解出, 看视频             | 11/16/2020 |
-| 17   | Run-Length Encoding        | String              | Easy      | 需要看视频                 | 11/16/2020 |
-| 18   | Nth Fibonacci              | Recursion           | Easy      | 需要看视频                 | 11/16/2020 |
-| 19   | Product Sum                | Recursion           | Easy      | 没解出, 看视频             | 11/16/2020 |
-| 20   | Branch Sums                | Binary Trees        | Easy      | 没解出, 看视频             | 11/16/2020 |
-| 21   | Quick Sort                 | Sorting             | Hard      | 没解出, 看视频             | 11/17/2020 |
-| 22   | Three Number Sort          | Sorting             | Medium    | 需要看视频                 | 11/17/2020 |
-| 23   | Node Depths                | Binary Trees        | Easy      | 需要看视频                 | 11/17/2020 |
-| 24   | Find Closest Value in BST  | Binary Search Trees | Easy      | 没解出, 看视频             | 11/19/2020 |
-| 25   | Longest Peak               | Arrays              | Medium    | 没解出, 看视频             | 11/19/2020 |
-| 26   | Array of Products          | Arrays              | Medium    | 需要看视频                 | 11/19/2020 |
-| 27   | Heap Sort                  | Sorting             | Difficult |                            |            |
-| 28   | Search In Sorted Matrix    | Searching           | Medium    |                            |            |
-| 29   | BST Construction           | Binary Search Trees | Medium    | 需要看多次, 递归解法没有看 | 11/19/2020 |
-| 30   | Linked List Construction   | Linked List         | Medium    |                            |            |
-| 31   | Min Heap Construction      | Heaps               | Medium    | 没解出, 看视频             | 11/19/2020 |
-| 32   | Permutations               | Recursion           | Medium    |                            |            |
-| 33   | Powerset                   | Recursion           | Medium    | 没解出, 看视频             | 11/19/2020 |
-
-
-
 ### Depth First Search
 
 ```python
@@ -292,4 +252,84 @@ min heap
 max heap
 
 当前节点的值大于或者等于子节点
+
+# Recursion
+
+## Permutation
+
+> Write a function that takes in an array of unique integers and returns an array of all permutations of those integers in no particular order.
+>
+> If the input array is empty, the function should return an empty array.
+>
+> Sample Input
+>
+> ```
+> array = [1,2,3]
+> ```
+>
+> Sample Output
+>
+> ```
+> [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]
+> ```
+>
+> 
+
+### Python Implementation
+
+```python
+def 
+```
+
+# Linked List
+
+> Write a `DoublyLinkedList` class that has a `head` and `tail`, both of which point to either a linked list `Node` or `None`/`null`. The class should support:
+>
+> - setting the head and tail of the linked list.
+> - Inserting nodes before and after other nodes as well as at given positions (the position of the head node is `1`)
+> - Removing given nodes and removing nodes with given values.
+> - Searching for nodes with given values
+>
+> Note that the `setHead`, `setTail`, `insertBefore`, `insertAfter`, `insertAtPosition` and `remove` methods all take in actual `Node` as input parameters -- not integers (except for `insertAtPosistion`, which also takes in an integer representing the position): this means that you don't need to create any new `Node` in these methods.
+
+
+
+### Python Implementation
+
+Doubly Linked List
+
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.prev = None
+        self.after = None
+      
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+	
+    def setHead(self, node):
+        self.head = node
+       
+   	def setTail(self, node):
+        self.tail = node
+        
+        
+```
+
+
+
+# Sort
+
+## Bubble Sort
+
+### Java Implementation
+
+### Python Implementation
+
+```python
+def
+```
 
