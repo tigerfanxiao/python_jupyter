@@ -303,7 +303,21 @@ If each node in the tree has a maximum of two children, we say that the tree is 
 
 ## Max Heap
 
-当前节点的值大于或者等于子节点
+* Value of parent node is greater than or equal to its children
+
+  ```
+  Example of max heap
+              55
+            /    \
+          11     33
+         /   \      
+        9     8
+  ```
+
+* Construction of Max Heap
+
+  1. Insert from the left leaf
+  2. during insertion, make the tree complete
 
 ```
 [8,5,2,9,5,6,3] --> [9,8,6,5,5,2,3]
