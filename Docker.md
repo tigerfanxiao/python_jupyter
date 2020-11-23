@@ -49,7 +49,7 @@ docker run hello-world
 
 ```
 
-## Install
+## Install docker
 
 Since we can bypass that step, we'll start with updating our machine.
 

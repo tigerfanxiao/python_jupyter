@@ -133,12 +133,57 @@ A way to solve the problem by breaking it down into a collection of sub problems
 
 4. 计算顺序: 一般是从小到大, 如果后面的结果, 基于先前计算的结果
 
-#  BST 二叉树
+
+
+# Trees
+
+A Tree consists of a set of nodes (vertex) and a set of edges that connect pairs of nodes. A tree has following properties:
+
+- One node of the tree is designed as the root
+- Every node `n`, except the root node, is connected by an edge from exactly one other node p, where p is parent of n
+- A unique path traverse from the root to each node
+
+**Branch**
+
+- Any path in the tree that starts from the root node and ends at one of the bottom nodes in the tree
+
+### Complete Tree
+
+- Every single level filled up except the final level which may or may not be filled up, but the final level has nodes, they should be filled up left to right
+
+  ```
+  complete binary tree                       not complete binary tree
+   		20											 20
+   	   /   \                                            /
+   	 30     40                                        30
+      /   \                                            /
+    23     26                                        40
+                                                    /
+                                                  50  
+  ```
+
+  
+
+### Full Tree
+
+- Every node in the tree, either has no children nodes or `k` children nodes
+
+### Perfect Tree
+
+- All of the leaf node has the same depth
+
+### Binary Tree
+
+If each node in the tree has a maximum of two children, we say that the tree is a binary tree
+
+# BST
+
+
 
 ## 概念和定义
 
 * 每一个节点只有左右两个子节点
-* 节点左侧的所有节点都比节点小, 节点右侧的所有节点都比节点大
+* Its value is strictly greater than the values of every node to its left, its value is less than or equal to the values of every node to its right;
 * 有定义推断: 最左侧的子节点是整个树最小的节点, 最右侧的子节点是整个树最大的节点
 
 ```
@@ -205,57 +250,6 @@ def contain(self, value):
     return False
 ```
 
-
-
-## (Algo Export) BST Construction
-
-Write a BST class for a Binary Search Tree. The 
-
-# Trees
-
-A Tree consists of a set of nodes (vertex) and a set of edges that connect pairs of nodes. A tree has following properties:
-
-- One node of the tree is designed as the root
-- Every node `n`, except the root node, is connected by an edge from exactly one other node p, where p is parent of n
-- A unique path traverse from the root to each node
-
-**Branch**
-
-- Any path in the tree that starts from the root node and ends at one of the bottom nodes in the tree
-
-### Complete Tree
-
-- Every single level filled up except the final level which may or may not be filled up, but the final level has nodes, they should be filled up left to right
-
-  ```
-  complete binary tree                       not complete binary tree
-   		20											 20
-   	   /   \                                            /
-   	 30     40                                        30
-      /   \                                            /
-    23     26                                        40
-                                                    /
-                                                  50  
-  ```
-
-  
-
-### Full Tree
-
-- Every node in the tree, either has no children nodes or `k` children nodes
-
-### Perfect Tree
-
-- All of the leaf node has the same depth
-
-### Binary Tree
-
-If each node in the tree has a maximum of two children, we say that the tree is a binary tree
-
-## Binary Search Trees
-
-
-
 # Heap
 
 * Heap is a complete, balanced binary tree
@@ -317,7 +311,7 @@ If each node in the tree has a maximum of two children, we say that the tree is 
 * Construction of Max Heap
 
   1. Insert from the left leaf
-  2. during insertion, make the tree complete
+  2. during insertion, make the tree complete 
 
 ```
 [8,5,2,9,5,6,3] --> [9,8,6,5,5,2,3]
