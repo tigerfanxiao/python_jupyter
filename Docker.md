@@ -215,8 +215,6 @@ Docker
 
 Kubernetes 
 
-
-
 • Certified Kubernetes Administrator (CKA)
 
 • Kubernetes the Hard Way 

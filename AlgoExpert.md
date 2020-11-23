@@ -250,6 +250,53 @@ def contain(self, value):
     return False
 ```
 
+## BST Traverse
+
+```    
+tree =          10
+             /       \
+           5          15
+         /    \         \
+       2        5        22
+     /
+    1 
+```
+
+
+
+### In Order Traverse
+
+* from the most left leaf
+* left -> Top -> right
+
+```
+[1, 2, 5, 5, 10, 15, 22]
+```
+
+
+
+### Pre Order Traverse
+
+* from root node
+* top -> left -> right
+
+```
+[10, 5, 2, 1, 5, 15, 22]
+```
+
+
+
+### Post Order Traverse
+
+* from the most left leaf
+* left -> right -> top
+
+```
+[1, 2, 5, 5, 22, 15, 10]
+```
+
+
+
 # Heap
 
 * Heap is a complete, balanced binary tree
