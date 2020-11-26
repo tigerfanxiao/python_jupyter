@@ -390,6 +390,391 @@ This will output the information for **all** containers. We only have the one ri
 
 - [Docker Cheat Sheet](https://www.docker.com/sites/default/files/d8/2019-09/docker-cheat-sheet.pdf)
 
+We know how to access our container through some `docker` commands, but what if we want to share our container with the greater world? Docker provides us with the option to publish our container to a port on our host, letting us share or otherwise test our applications and services.
+
+Before we start, however, let's make sure we have something we can actually check and create an index page for our web server.
+
+```bash
+vim index.html
+Hello, World!
+```
+
+Save and exit the file, then push it to the container.
+
+```bash
+docker cp index.html web01:/var/www/
+```
+
+Start nginx.
+
+```bash
+docker exec -dt web01 nginx -g 'pid /tmp/nginx.pid; daemon off;'
+```
+
+Now let's see if this works. Right now, our container can only be accessed from our host. Specifically there's a private network we can use to access the host. So to see if our web configuration is working, we can `curl` the container's private IP. But first, we need to locate the private IP. We can find this with `docker inspect`.
+
+```bash
+docker inspect web01 | grep -i ip
+```
+
+This outputs a variety of information about our container, including container state, overall configuration, and networking. Look for the `IPAddress` value, then use `curl` to see if everything is working.
+
+```bash
+curl <IPAddress>
+```
+
+Our web container is working! But we've now encountered a problem: we can't publish an existing container to a port on our host, at least not through Docker. Instead, we'll need to work with a copy of this container.
+
+First, we'll need to create an image based on our container. We can do this with a:
+
+```bash
+docker commit web01 web-base
+```
+
+We can then deploy our container with `docker run`. Only this time, we specifically want to use the `--port` or `-p` flag, to map the host port to the container.
+
+```bash
+docker run -p 80:80 -dt --name web02 web-base
+```
+
+We may also need to restart `nginx`.
+
+```bash
+docker exec web02 rc-service nginx restart
+```
+
+We can now navigate to the **public IP** of our localhost and see our `index.html` file.
+
+## Wrap-Up
+
+```shell
+# View container information
+docker inspect <container>
+# Create an image of an existing container
+docker commit <container> <image-name>
+# Publish to host port
+docker run -p <host_port>:<container_port> --dt --name <container> <image-name>
+```
+
+We wouldn't have been able to complete any of our previous lessons if not for the `alpine` Docker image, and Docker cannot function without a base image for the container to base itself on. But what **is** an image? Those familiar with virtual machine images probably already have some idea, and they'd be mostly right save for a few differences to increase reusability, decrease disk space, and ensure the `docker build` runs quickly. To achieve this, images are comprised of intermediate layers that are then cached. An image should contain everything it needs to complete its intended job, whether that be run an application, microserver, or otherwise. This includes code, runtime, libraries, environmental variables, and configuration files.
+
+We can see the steps taken to build an image by viewing the `Dockerfile` of an image. This can be found in the image repository itself, which in most cases will be the **Docker Hub**. Let's look at the `hello-world` image, found [here](https://hub.docker.com/_/hello-world).
+
+Under **Shared Tags**, click on the **latest**: **linux** build. Notice the simple Dockerfile:
+
+```bash
+FROM scratch
+COPY hello /
+CMD ["/hello"]
+```
+
+The `hello-world` image is a **base image**. This means it's not based on any other image, but instead uses `FROM scratch` to signify the next command will be the filesystem layer. Images can also be based on other images. For example, the [`nginx`](https://hub.docker.com/_/nginx) image we used in the lab is based on Debian Buster (`FROM debian:buster-slim`). This is the image's **parent image**.
+
+The next line copies the `hello` binary to the root of the filesystem, which can be found [here](https://github.com/docker-library/hello-world/blob/master/hello.c). This is the output message we saw when we ran the `hello-world` container.
+
+The final line runs the binary, outputting the `DOCKER_GREETING` message. There can only be one `CMD` line, and it's the command that's run after the container is launched. If not persistent, the container will automatically exit once the command has finished.
+
+Each line works as its own layer and is cached separately, as indicated earlier.
+
+Now, let's get hands-on and create our own Dockerfile in the next lesson.
+
+## Wrap-Up
+
+- Images are based on a Dockerfile
+  - **Base Image**: An image based on the `scratch` template; the first layer defines the file system.
+  - **Parent Image**: The image from which the current Docker image is based.
+- Images are comprised of layers.
+  - Each layer is cached.
+  - Increases reusability.
+  - Decreases disk space.
+  - Ensures speed during deploy.
+
+Now that we know what images are made of, let's make one ourselves via Dockerfile. For this, we're going to dockerize a Node.js application.
+
+Let's grab our app:
+
+```bash
+cd
+wget --content-disposition 'https://github.com/linuxacademy/content-Introduction-to-Containers-and-Docker/raw/master/lessonfiles/demo-app.tar'
+tar -xf demo-app.tar
+cd app/
+```
+
+We need our Dockerfile to have the following layers:
+
+1. Based on the Node.JS 10 Alpine image (`node:10-alpine`)
+2. Creates the `/home/node/app/node_modules` directory and sets `node` as the owner and group
+3. Sets the working directory as `/home/node/app`
+4. Copies app `package*` files to the working directory
+5. Sets the NPM registry
+6. The installs are prerequisite NPM packages
+7. Copies the rest of the `app/` data to the working directory and sets the owner and group of the working directory to `node`
+8. Switches to the `node` user
+9. Opens port 8080 to be used
+10. Runs the application
+
+So let's create our `Dockerfile` and start.
+
+```bash
+vim Dockerfile
+```
+
+Dockerfiles are built using **instructions** which are just set keywords that perform certain actions. We saw three in the previous lesson: `FROM`, `COPY`, and `CMD`. Instruction keywords do **not** have to be written in all caps, but it is preferred.
+
+We first need to define our parent image with `FROM`; all valid Dockerfiles must begin with `FROM`.
+
+```
+FROM node:10-alpine
+```
+
+We now want to create a directory and set its owner. For this, we can use the `RUN` command, which lets us execute any commands against the shell. Our image is based on Alpine, which uses the `ash` shell, so our command will be `mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app`. All we have to do is feed that into the `RUN` instruction.
+
+```
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+```
+
+Next, we need to move into the `/home/node/app` directory. We do this by setting a **working directory** with `WORKDIR`. Any `RUN`, `CMD`, `COPY`, `ADD`, and `ENTRYPOINT` instructions that follow will be performed in this directory:
+
+```
+WORKDIR /home/node/app
+```
+
+We now want to add our files. We have two options for this: `COPY` and `ADD`. `ADD` can pull files from outside URLs, and thus utilizes additional functionality. In other words, it's best to use `COPY` if you can, and since our `package*` files are all local, we can do so:
+
+```
+COPY package*.json ./
+```
+
+With the first argument being our source file(s) and the second our destination.
+
+We now need to ensure the prerequisite packages for our application are installed from NPM. These are just more `RUN` commands.
+
+```
+RUN npm config set registry http://registry.npmjs.org/
+RUN npm install
+```
+
+We can now copy over the rest of our application files using `COPY`. We'll also want to set the owner of our working directory to the `node` user and group. Since we're on Linux, this can **also** be achieved using some special `COPY` functionality.
+
+```dockerfile
+# copy the all the local files to the docker working directory and set the owner to node:node
+COPY --chown=node:node . .
+```
+
+From here, we want to switch users. This works similarly to the previous `WORKDIR` command, but now we're switching users not directories for any following `RUN`, `CMD`, and `ENTRYPOINT` commands.
+
+```
+USER node
+```
+
+Our application is hosted on port 8080, so we also want to make sure that port is available on our container. For this, we'll use the `EXPOSE` keyword.
+
+```
+EXPOSE 8080
+```
+
+And now, finally, we want to provide the command (`CMD`) run as soon as the container is launched. Unlike `RUN`, `CMD`'s preferred format doesn't take this as a shell command. Instead, the executable name should be supplied in an array, followed by any parameters: `CMD ["executable","param1","param2"]`. In our case, this will be:
+
+```
+CMD [ "node", "index.js" ]
+```
+
+Our final Dockerfile should look like:
+
+```
+FROM node:10-alpine
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /home/node/app
+COPY package*.json ./
+RUN npm config set registry http://registry.npmjs.org/
+RUN npm install
+COPY --chown=node:node . .
+USER node
+EXPOSE 8080
+CMD [ "node", "index.js" ]
+```
+
+Save and exit (`:wq`).
+
+We can now build our container using the `docker build` command and specifying the location of our Dockerfile. Since we're in the same directory, we can just denote this with a `.`. That said, we'll want to provide a name for our output image, so we'll want to use the `-t` flag to set a flag. If we're planning on adding this to the Docker Hub, we'll want to follow a `<username>:<imagename>` format for the tag. Since we aren't, we'll just give it the simple name of `appimage`.
+
+```shell
+docker build . -t appimage
+# show docker images
+docker images 
+```
+
+We can now run our container.
+
+```
+docker run -dt --name app01 appimage
+```
+
+And see that our app is working.
+
+```
+docker inspect app01 | grep IPAddress
+curl 172.17.0.2:8080
+```
+
+## Wrap-Up
+
+- Dockerfiles are built using a series of instructions, dictated by set keywords:
+
+  - All Dockerfiles start with `FROM`.
+
+  - `RUN` runs commands on the shell.
+
+  - `WORKDIR` sets the working directory.
+
+  - ```
+    COPY
+    ```
+
+    copies files 
+
+  * `ADD` also copies files, but can copy files from outside URLs.
+
+  - `ADD` uses more resources.
+  - We should use `COPY` when possible.
+  - `USER` sets the working user.
+  - `EXPOSE` exposes the container port.
+  - `CMD` is the final command in the Dockerfile and is the command run after the container is launched.
+
+- [See a full list of instructions.](https://docs.docker.com/engine/reference/builder/)
+
+- ```
+  docker build <dockerfile>
+  ```
+
+   
+
+  builds the image.
+
+  - `-t`: Set a name; we should use `<username>:<imagename>` if using the Docker Hub.
+
+Now that we've pulled down, run, and otherwise created a couple of images, we should take the time to learn how to manage them. Luckily for us, many of the commands for image management are similar to the commands we used to manage our containers themselves.
+
+Let's start with considering how images are used: images are pulled from their host repository and then cached on the local machine. When we perform a `docker run`, Docker will first look locally, then search the Docker Hub if it can't find an image. If we want to pull down an image from the Docker Hub **before** we run a `docker run`, we can use the `docker pull` command.
+
+```bash
+docker pull alpine
+```
+
+Notice how it tells us that our image is already up to date; we had pulled down the `alpine` image earlier in this course, after all.
+
+Should we want to see which images we have stored locally, we can run:
+
+```bash
+docker image ls
+```
+
+Notice we have our `appimage`, as well as the `alpine`, `web-base`, and `hello-world` images.
+
+Should we desire to remove any of these images, we can use `docker image rm <container>`, or, alternatively, pair `docker image prune` with the `-a` flag to remove all images not associated with a container. Lets do this:
+
+```bash
+docker image prune -a
+```
+
+Finally, we can review information about any of our images using `docker image inspect`.
+
+```bash
+docker image inspect appimage
+```
+
+## Wrap-Up
+
+- Images are managed similarly to containers (add `image`).
+
+- `docker pull <image>`: Pulls down an image; this happens automatically when no image is available during `docker run`.
+
+- ```
+  docker image ls
+  ```
+
+  : Lists all Docker images.
+
+  - `--no-trunc` shows the full ID.
+
+- `docker image rm <image>`: Removes an image.
+
+- ```
+  docker image prune
+  ```
+
+  : Removes all dangling images.
+
+  - `-a`: Removes all images not being used by a container.
+
+- `docker image inspect <image>`: Displays image data.
+
+If we want to share our Docker images with the world (or just our coworkers), we can create a Docker repository on the Docker Hub found at [hub.docker.com](https://hub.docker.com/). Log in or create an account with a username, password, and associated email.
+
+Once logged in, select **Repositories**, then click the **Create Repository** button. Give your repo a name; I'll be using the name `demo-app`. Leave the repo public, and provide no build settings. **Create** the repo.
+
+From here, we'll want to switch to the command line. To upload our image to the Docker Hub, we'll need to log in from the command line.
+
+```bash
+docker login --username=<username>
+```
+
+Input the password when prompted.
+
+Before we can push directly to our repo, however, we need to tag our image with the name of our repository in a `<username>/<reponame>` format. This is done via `docker tag`.
+
+```bash
+docker tag appimage <username>/demo-app:latest
+```
+
+We can now use the `docker push` command to share it.
+
+```bash
+docker push <username>/demo-app
+```
+
+If we return to our repo in our browser and refresh, then select **Tags**, we can see the history of our image and share various versions as needed.
+
+## Wrap-Up
+
+- Use the Docker Hub to host images.
+- `docker login --username=<username>`: Log in to your Docker account on the CLI.
+- `docker tag <image> <username>/<reponame>`: Tag the image with the repo name.
+- `docker push <username>/<reponame>`: Push the image to Docker Hub.
+
+If we want to share our Docker images with the world (or just our coworkers), we can create a Docker repository on the Docker Hub found at [hub.docker.com](https://hub.docker.com/). Log in or create an account with a username, password, and associated email.
+
+Once logged in, select **Repositories**, then click the **Create Repository** button. Give your repo a name; I'll be using the name `demo-app`. Leave the repo public, and provide no build settings. **Create** the repo.
+
+From here, we'll want to switch to the command line. To upload our image to the Docker Hub, we'll need to log in from the command line.
+
+```bash
+docker login --username=<username>
+```
+
+Input the password when prompted.
+
+Before we can push directly to our repo, however, we need to tag our image with the name of our repository in a `<username>/<reponame>` format. This is done via `docker tag`.
+
+```bash
+docker tag appimage <username>/demo-app:latest
+```
+
+We can now use the `docker push` command to share it.
+
+```bash
+docker push <username>/demo-app
+```
+
+If we return to our repo in our browser and refresh, then select **Tags**, we can see the history of our image and share various versions as needed.
+
+## Wrap-Up
+
+- Use the Docker Hub to host images.
+- `docker login --username=<username>`: Log in to your Docker account on the CLI.
+- `docker tag <image> <username>/<reponame>`: Tag the image with the repo name.
+- `docker push <username>/<reponame>`: Push the image to Docker Hub.
+
 # Orchestration 
 
 Kubernetes is Orchestration tool to manage container
