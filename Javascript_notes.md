@@ -12,7 +12,11 @@
 
 
 
-# vscode configuration
+# Tools
+
+## vscode 
+
+### vscode configuration
 
 * install monokai pro theme
 
@@ -20,9 +24,7 @@
 
 * install auto close tag extension
 
-
-
-## Setting
+### vscode Setting
 
 autosave: on focus change
 
@@ -32,15 +34,16 @@ word wrap: on
 
 format on save: checked
 
-## tricks
+### vscode tricks
 
 1. select the content, ctrl + d, will selected all the same content
 2. move one line up, alt + up
 3. open another vertical window ctrl +\
 4. open terminal: ctrl + shift + `
-5. 
 
+## Chrome
 
+* inspect window Ctrl + Shift + i
 
 # Fundamentals
 
@@ -119,22 +122,13 @@ lastName = 'Fan'
 
 ```
 
-
+### Escaping Characters
 
 ```javascript
-const nemo = ['nemo'];
-function my_function(arr) {
-    let t0 = performance.now();
-    for(let i=0; i<arr.length; i++) {
-        if (arr[i] === 'nemo') {
-            console.log('you are the best!');
-        }
-    }
-    let t1 = performance.now();
-    console.log('Call to find Nemo took' + (t1-t0) + ' miliseconds')
-}
-my_function(nemo);
+console.log("The man whispered, \"please speak to me.\"")
 ```
+
+
 
 ### Symbol
 
@@ -147,10 +141,7 @@ let sym3 = Symbol('foo')
 
 // get false
 sym2 === sym3
-
 ```
-
-## 
 
 ### Operator
 
@@ -254,8 +245,6 @@ switch (day) {
 }
 ```
 
-
-
 ### type conversion, type coercion
 
 ```javascript
@@ -264,17 +253,17 @@ let year = '1990';
 year = Number(year);
 typeof year
 
-// convert string to number implicitly
+// convert number to string implicitly
 let num1 = 1
 let num2 = '2'
-console.log(1 + 2) // return 3
+console.log(num1 + num2) // return 3
 
 // convert something cannot be converted to number
 const a = number('fa') // return NaN: not a number
 typeof a // NaN is Number type
 
 // convert a number to string
-String('23');
+String(23);
 
 // type coercion
 console.log('I am ' + 2 +'years old') // add operator will turn number to string
@@ -896,7 +885,6 @@ for (key in obj00) {
 ### html class and id
 
 ```html
-
 <!-- class is not unique -->
 <p class="first">
     content
@@ -907,7 +895,19 @@ for (key in obj00) {
 
 
 
-## DOM object
+## DOM Selector
+
+```javascript
+document.body.addEventListener('click', function () {
+     var myParent = document.getElementsByTagName("h1")[0]; 
+     var myImage = document.createElement("img");
+     myImage.src = 'https://thecatapi.com/api/images/get?format=src&type=gif';
+     myParent.appendChild(myImage); 
+     myImage.style.marginLeft = "160px";
+});
+```
+
+
 
 ```javascript
 document // root 

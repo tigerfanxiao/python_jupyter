@@ -774,6 +774,7 @@ If we return to our repo in our browser and refresh, then select **Tags**, we ca
 - `docker login --username=<username>`: Log in to your Docker account on the CLI.
 - `docker tag <image> <username>/<reponame>`: Tag the image with the repo name.
 - `docker push <username>/<reponame>`: Push the image to Docker Hub.
+- docker logout 
 
 # Orchestration 
 

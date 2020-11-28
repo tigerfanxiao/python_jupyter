@@ -1,3 +1,16 @@
+# Preparation
+
+## Install Flask
+
+```
+pip --version
+pip3 --version
+pip3 install flask
+pip3 list
+```
+
+
+
 ## Create virtual env
 
 On windows
@@ -7,12 +20,6 @@ py -3 -m venv venv # create virtual environment in folder venv
 .\venv\Scripts\activate # activate the virtual environment
 # or if you use power shell
 .\venv\Script\Activate.ps1
-
-pip --version
-pip3 --version
-
-pip3 install flask
-pip3 list
 
 ```
 
@@ -49,8 +56,6 @@ $ export FLASK_APP=hello.py
 # make suer you pwd is in project foler
 flask run
 ```
-
-
 
 on Windows
 
