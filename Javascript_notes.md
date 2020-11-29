@@ -86,6 +86,13 @@ let fullAge = true;
 // Datatype: Undefined -- Value taken by a variable that is not defined (empty value)
 let children;
 // Datatype: Null -- Also means 'empty value'
+// null refer to nothing
+var x = null;
+// undefined refers to absense of value
+var x;
+// NaN not a number
+Math.sqrt(-10)
+
 // Datatype: Symbol (ES2015) -- Value that is unique and cannot be changed 
 // Datatype: Bigint (ES2020) -- Larger integers than the Number type can hold
 
@@ -103,12 +110,50 @@ let me = {
 typeof null // is object
 ```
 
-### const, let, var
+### scope & const, let, var
 
-* value in the `const` varaible can not be changed, immutable
-* value in the `let` variable can be changed, mutable 
-* `let` and `const` is block-scoped and `var` is function-scoped
-* **Always properly declare varaibles** 
+1. Global scope - When a particular variable is visible (can be used) anywhere in the code. Such a variable is generally called as **Global variable**.
+2. Function scope - When a particular variable is visible (can be used) within ***a\*** particular function only. Such a variable is generally called as **Local variable**.
+3. Block scope - When a particular variable is visible (can be used) within ***a\*** pair of `{ . . . }` only.
+
+```javascript
+/*
+ * Global scope. 
+ * This variable declared outside of any function is called Global variable. 
+ * Hence, you can use this anywhere in the code
+ */
+var opinion = "This nanodegree is amazing";
+
+// Function scope
+function showMessage() {
+    // Local variable, visible within the function `showMessage`
+    var message = "I am an Udacian!"; 
+
+    // Block scope
+    {
+          let greet = "How are you doing?";
+        /*
+         * We have used the keyword `let` to declare a variable `greet` because variables declared with the `var` keyword can not have Block Scope. 
+         */
+    } // block scope ends
+
+    console.log( message ); // OK
+    console.log( greet ); // ERROR. 
+    // Variable greet can NOT be used outside the block
+
+    console.log( opinion ); // OK    to use the gobal variable anywhere in the code
+
+} // function scope ends
+
+```
+
+### Variable Declaration
+
+There are three ways to declare a variable:
+
+1. `let` - It a new way to declare a variable in any scope - Global, Local, or Block. The value of this variable can be changed or reassigned anytime within its scope.
+2. `const` - It is also a way to declare *constants* in any scope - Global, Local, or Block. Once you are assigned a value to a `const` variable, the value of this variable CANNOT be changed or reassigned throughout the code.
+3. `var` - This is the old way of declaring variables in only two scope - Global, or Local. Variables declared with the `var` keyword can not have Block Scope. The value of this variable can be changed or reassigned anytime within its scope.
 
 Bad practices
 
@@ -122,10 +167,32 @@ lastName = 'Fan'
 
 ```
 
+### hoist
+
+- avaScript hoists function declarations and variable declarations to the top of the current scope.
+- Variable *assignments* are not hoisted.
+- Declare functions and variables at the top of your scripts, so the syntax and behavior are consistent with each other.
+
+```javascript
+function sayGreeting() {
+    // hoist var greeting, but not assign value
+    console.log(greeting);
+   	var greeting = 'hello';
+}
+syaGreeting(); // undefined
+```
+
+
+
 ### Escaping Characters
 
 ```javascript
 console.log("The man whispered, \"please speak to me.\"")
+"\\" // backslash
+"\"" // double quote""
+"\'" //single quote
+"\n" // new line
+"\t" // tab
 ```
 
 
@@ -168,6 +235,18 @@ true && true // and
 true || false // or
 !true // not true
 
+// equal 
+3 === 3
+// not equal
+4 !== 5
+// not null
+token != null
+// or
+false || true
+// and
+true && true
+// not 
+!true
 ```
 
 ### format
@@ -187,7 +266,7 @@ lines`);
 
 * expression produce a value
 * statement not produce a value but an action. For example: if else statement
-* Tenary operator is expression and can be used in template literal
+* Ternary operator is expression and can be used in template literal
 
 ```javascript
 // you can use expression the template literal
@@ -213,9 +292,11 @@ if (a === 0) {
     console.log('this is else');
 }
 
-// tenary operator
+// ternary operator
 const age = 34;
 age >= 18 ? console.log('I can drink wine') : console.log('you are not allowed to drink');
+// embeded ternary expression
+var category = eatsPlants ? (eatsAnimals ? "omnivore" : "herbivore") : (eatsAnimals ? "carnivore" : "undefined");
 
 // assignment with tenary operator
 const bill = 275
@@ -225,24 +306,24 @@ const tip = bill <= 300 && bill >= 50 ? bill*0.15 : bill * 0.2
 ### switch
 
 ```javascript
-const day = 1;
-switch (day) {
-    case 1:
-        console.log('First');
-        break;
-    case 2:
-        console.log('Second');
-        break;
-    case 3:
-        console.log('Third');
-        break;
-    case 4:
-    case 5:
-        console.log('great than 4 less than 5');
-    	break;
-    default:
-        console.log("I don't know");
+var month = 2;
+
+switch(month) {
+  case 4:
+  case 6:
+  case 9:
+  case 11:
+    days = 30;
+    break;
+  case 2:
+    days = 28;
+    break;
+  default:
+  	days = 31;
+    break;
 }
+
+console.log("There are " + days + " days in this month.");
 ```
 
 ### type conversion, type coercion
@@ -278,9 +359,10 @@ console.log('23' > '18') // return true
 ### Truthy and Falsy Value
 
 ```javascript
-// falsy value: 0, '', undefined, null, NaN
+// falsy value: 0, '', undefined, null, NaN, false
 // anything else is Falsy value
 console.log(Boolean({})) // empty object is truthy
+console.log(Bollean([]))
 console.log(Boolean('0')) // 0 string is true
 console.log(Boolean(0)) // false
 ```
@@ -290,13 +372,16 @@ console.log(Boolean(0)) // false
 * always use triple equals and pretend the doubt equals does not exist
 
 ```javascript
-// === is restrict equal
+// === is strict comparison
 18 === 18 // return true
 18 === '18' // return false
-// == loose equal operator, does type coercion
+// == loose equal operator, does implicit type coercion
 18 == '18' // return true
+0 == false // return true
+" " == false // return true
+1 == true // return true
 
-// not equal
+// not stric equal
 typeof 'a' !== 'string'
 ```
 
@@ -345,8 +430,6 @@ do {
 
 ### break & continue
 
-
-
 # Array
 
 ```javascript
@@ -383,6 +466,35 @@ friend.indexOf('steven') // return the index
 // check if element exists
 friend.includes('steven') // return boolean
 
+// reverse
+friend.reverse()
+
+// sort
+friend.sort()
+
+//join
+['a', 'b'].join(" ")
+
+// transfrom array to string
+['a', 'b'].toString()
+
+```
+
+### splice()
+
+**Following is the syntax of `splice()` method**: `arrayName.splice(arg1, arg2, item1, ....., itemX);` where,
+
+- `arg1` = Mandatory argument. Specifies the starting index position to add/remove items. You can use a negative value to specify the position from the end of the array e.g., -1 specifies the last element.
+- `arg2` = Optional argument. Specifies the count of elements to be removed. If set to 0, no items will be removed.
+- `item1, ....., itemX` are the items to be added at index position arg1
+
+```javascript
+var donuts = ["glazed", "chocolate frosted", "Boston creme", "glazed cruller"];
+donuts.splice(1, 1, "chocolate cruller", "creme de leche"); 
+// removes "chocolate frosted" at index 1 and adds "chocolate cruller" and "creme de leche" starting at index 1
+
+Returns: ["chocolate frosted"]
+donuts array after calling the splice() method: ["glazed", "chocolate cruller", "creme de leche", "Boston creme", "glazed cruller"]
 ```
 
 ### fill
@@ -401,22 +513,24 @@ const filterArray = array.filter(num=> {
 })
 ```
 
-### operators
+### forEach
 
 ```javascript
-// equal 
-3 === 3
-// not equal
-4 !== 5
-// not null
-token != null
-// or
-false || true
-// and
-true && true
-// not 
-!true
+words = ["cat", "in", "hat"];
+words.forEach(function(word, num, all) {
+  console.log("Word " + num + " in " + all.toString() + " is " + word);
+});
+// not to use all
+words = ["cat", "in", "hat"];
+words.forEach(function(word, num) {
+  console.log("Word " + num + " in " + words.toString() + " is " + word);
+});
+```
 
+### map
+
+```javascript
+[1,2,3].map(v=> v*2)
 ```
 
 ### reduce
@@ -431,7 +545,36 @@ const reduceArray = my_list.reduce((acc, num) => {
 }, 10) // 10 is the initiate value, the result is 25
 ```
 
-#### 
+# Number
+
+```javascript
+// round 2 decimal
+let n = 10.0001
+n.toFixed(2) 
+
+// local string
+let price = 10000
+a.tolocalString("en-US")
+//
+```
+
+
+
+# String
+
+```javascript
+// Pick a string. Your string can have any number of characters.
+var my_string = "a";
+
+// Calculate the ASCII value of the first character, i.e. the character at the position 0. 
+var ASCII_value = my_string.charCodeAt(0);
+
+// uppercase
+my_string.toUpperCase();
+
+```
+
+
 
 # Function
 
@@ -493,6 +636,54 @@ const yearsUtilRetirement = (birthYear, thisYear) => {
 };
 yearsUtilRetirement(1994)
 ```
+
+### Callback function
+
+Functions as parameters
+
+Being able to store a function in a variable makes it really simple to pass the function into another function. A function that is passed into another function is called a **callback**.
+
+```javascript
+// function expression catSays
+var catSays = function(max) {
+  var catMessage = "";
+  for (var i = 0; i < max; i++) {
+    catMessage += "meow ";
+  }
+  return catMessage;
+};
+
+// function declaration helloCat accepting a callback
+function helloCat(callbackFunc) {
+  return "Hello " + callbackFunc(3);
+}
+
+// pass in catSays as a callback function
+helloCat(catSays);
+```
+
+
+
+### Inline function
+
+```js
+// Function declaration that takes in two arguments: a function for displaying
+// a message, along with a name of a movie
+function movies(messageFunction, name) {
+  messageFunction(name);
+}
+
+// Call the movies function, pass in the function and name of movie
+movies(function displayFavorite(movieName) {
+  console.log("My favorite movie is " + movieName);
+}, "Finding Nemo");
+```
+
+### Function expressions and hoisting
+
+Deciding when to use a function expression and when to use a function declaration can depend on a few things, and you will see some ways to use them in the next section. But, one thing you'll want to be careful of is hoisting.
+
+All *function declarations are hoisted* and loaded before the script is actually run. *Function expressions are not hoisted*, since they involve variable assignment, and only variable declarations are hoisted. The function expression will not be loaded until the interpreter reaches it in the script.
 
 ### IIFE
 
@@ -719,13 +910,6 @@ setTimeout(callback, time_miliseconds) // asynchronous function
 Math.floor()
 Math.random() // return number [0,1]
 Math.trunc(1.55) // return 1 
-```
-
-# Callback function
-
-```javascript
-[1,2,3].map(v=> v*2)
-
 ```
 
 # ES7
