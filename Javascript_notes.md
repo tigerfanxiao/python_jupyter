@@ -7,7 +7,17 @@
 ### Strict Mode
 
 ```javascript
-'use strict';
+function f1() {
+	'use strict';
+    return this;
+}
+console.log(f1())  // undefined
+
+function f1() {
+    return this;
+}
+console.log(f1())  // global object
+
 ```
 
 
@@ -70,7 +80,7 @@ multi-line comments
 
 * There are two types of variable in Javascript: Primitive and Object
 
-* Javascript has dynamic typing: we do not have to manually define the data type of the value stored in a variable. Instead, data types are determined automatically
+* JavaScript has dynamic typing: we do not have to manually define the data type of the value stored in a variable. Instead, data types are determined automatically
 
 #### value types
 
@@ -103,6 +113,33 @@ let me = {
     name: 'Jonas'
 };
 ```
+
+### Destructuring
+
+```javascript
+const point = [10, 25, -34];
+const [x, , z] = point;
+console.log(x, y, z);
+
+// you could ignore values 
+const [x, ,z]= point;
+```
+
+
+
+```javascript
+const gemstone = {
+  type: 'quartz',
+  color: 'rose',
+  carat: 21.29
+};
+
+const {type, color, carat} = gemstone;
+console.log(type, color, carat);
+let {color} = gemstone;
+```
+
+
 
 #### typeof bug
 
@@ -249,6 +286,40 @@ true && true
 !true
 ```
 
+### Spread operator
+
+```javascript
+const primes = new Set([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]);
+console.log(...primes);
+```
+
+### ...rest parameter
+
+```javascript
+printPackageContents('cheese', 'eggs', 'milk', 'bread');
+function printPackageContents(...items) {
+    for(const item of items) {
+        console.log(item);
+    }
+}
+```
+
+### Variadic functions
+
+can have indefinite number of arguments
+
+```javascript
+function sum(...nums) {
+  let total = 0;  
+  for(const num of nums) {
+    total += num;
+  }
+  return total;
+}
+```
+
+
+
 ### format
 
 ```javascript
@@ -261,6 +332,18 @@ multiple
 lines`);
 
 ```
+
+### Object Literal Shorthand
+
+```javascript
+let type = 'quartz';
+let color = 'rose';
+let carat = 21.29;
+let gemstone = {type,color, carat};
+// {type: "quartz", color: "rose", carat: 21.29}
+```
+
+
 
 ### expression and statement
 
@@ -385,6 +468,133 @@ console.log(Boolean(0)) // false
 typeof 'a' !== 'string'
 ```
 
+## closure
+
+* closure is the combination of a function and the environment within which that function was declared. The environment consists of any local variables that were in scope at the time that the closure was created.
+* In JavaScript, all the function form closures.
+
+```javascript
+// JS Nuggets: Closures
+
+function makeFunc() {
+  var name = "JS Nuggets";
+  function displayName() {
+    console.log(name);
+  }
+  return displayName;
+}
+
+var myFunc = makeFunc();
+myFunc();
+
+
+var counter = (function() {
+  var privateCounter = 0;
+  function changeBy(val) {
+    privateCounter += val;
+  }
+  return {
+    increment: function() {
+      changeBy(1);
+    },
+    decrement: function() {
+      changeBy(-1);
+    },
+    value: function() {
+      return privateCounter;
+    }
+  };   
+})();
+
+console.log(counter.value());
+counter.increment();
+counter.increment();
+console.log(counter.value()); 
+counter.decrement();
+console.log(counter.value());
+```
+
+
+
+## This
+
+```javascript
+/* THIS */
+
+console.log(this.document === document);
+
+console.log(this === window);
+
+this.a = 37;
+console.log(window.a); 
+
+
+function f1() {
+  'use strict';
+  return this;
+}
+console.log(f1() === window);
+
+
+
+function add(c, d) {
+  return this.a + this.b + c + d;
+}
+
+var o = {a: 1, b: 3};
+console.log(add.call(o, 5, 7));
+console.log(add.apply(o, [10, 20]));
+
+
+function f() {
+  return this.a;
+}
+
+var g = f.bind({a: 'unicycle'});
+console.log(g());
+
+var h = g.bind({a: 'cereal'}); // won’t work a second time
+console.log(h());
+
+var o = {a: 8, f: f, g: g, h: h};
+console.log(o.f(), o.g(), o.h());
+
+
+var o = {
+ traditionalFunc: function () {
+   console.log('traditionalFunc this === o?', this === o);
+ },
+ arrowFunc: () => {
+   console.log('arrowFunc this === o?', this === o);
+   console.log('arrowFunc this === window?', this === window);
+ }
+};
+
+o.traditionalFunc();
+
+o.arrowFunc();
+
+
+var o = {
+  prop: 37,
+  f: function() {
+    return this.prop;
+  }
+};
+
+console.log(o.f()); // logs 37
+
+var o = {prop: 23};
+
+function independent() {
+  return this.prop;
+}
+
+o.f = independent;
+
+console.log(o.f());
+```
+
 ## Loops
 
 ### for loop
@@ -405,6 +615,17 @@ function compressAllBoxes(boxes) {
 // ES6
 function compressAllBoxes(boxes) {
     boxes.forEach(box => console.log(box));
+}
+
+// ES6 for in loop, iterate with index
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+for (const index in digits) {
+  console.log(digits[index]);
+}
+// ES6 for of loop, iterate with element
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+for (let digit of digits) {
+  console.log(digit);
 }
 ```
 
@@ -511,6 +732,8 @@ const array = [1,2,3,4,5];
 const filterArray = array.filter(num=> {
     return num > 2;
 })
+// take off return without using return
+const filterArray = array.filter(num => num>2)
 ```
 
 ### forEach
@@ -529,8 +752,19 @@ words.forEach(function(word, num) {
 
 ### map
 
+Using `forEach()` will not be useful if you want to permanently modify the original array. `forEach()` always returns `undefined`. However, creating a new array from an existing array is simple with the powerful `map()` method.
+
 ```javascript
+// map function will return a new array
 [1,2,3].map(v=> v*2)
+
+//improvedDonuts ["JELLY DONUT HOLE", "CHOCOLATE DONUT HOLE", "GLAZED DONUT HOLE"]
+var donuts = ["jelly donut", "chocolate donut", "glazed donut"];
+var improvedDonuts = donuts.map(function(donut) {
+  donut += " hole";
+  donut = donut.toUpperCase();
+  return donut;
+});
 ```
 
 ### reduce
@@ -543,12 +777,32 @@ const my_list = [1,2,3,4,5];
 const reduceArray = my_list.reduce((acc, num) => {
     return acc + num;
 }, 10) // 10 is the initiate value, the result is 25
+
+// take off bracket without return 
+const reduceArray = my_list.reduce((acc, num) => acc + num, 10)
+console.log(reduceArray)
 ```
+
+### concat
+
+```javascript
+const fruits = ["apples", "bananas", "pears"];
+const vegetables = ["corn", "potatoes", "carrots"];
+const produce = fruits.concat(vegetables);
+console.log(produce);
+
+// or
+let produce = [...fruits, ...vegetables]
+```
+
+
 
 # Number
 
 ```javascript
-// round 2 decimal
+// transform string to number
+Number(12)
+// round 2 decimal string
 let n = 10.0001
 n.toFixed(2) 
 
@@ -614,7 +868,7 @@ calcAge2(1994)
 
 ### arrow function
 
-* arrow function is one type of function expression. 
+* arrow function get rid of the `function`, `return`, `{}` 
 * arrow function do not have `this` keyword
 
 ```javascript
@@ -636,6 +890,125 @@ const yearsUtilRetirement = (birthYear, thisYear) => {
 };
 yearsUtilRetirement(1994)
 ```
+
+### arrow function and this keyword
+
+this: The object that is executing the current function
+
+* if the function is a method of an object, this in this method refer to the object
+* if the function is a regular function, which means it is not a part of an object, this refer to the global object, it is the window object in browser, and global in node 
+* With regular functions, the value of `this` is set based on *how the function is called*. With arrow functions, the value of `this` is based on *the function's surrounding context*. In other words, the value of `this` *inside* an arrow function is the same as the value of `this` *outside* the function.
+
+```javascript
+// function is a method of an object
+const video = {
+    title: 'a', 
+    play() {
+        console.log(this);
+    }
+};
+video.play();
+```
+
+```javascript
+//regular function
+function playVideo() {
+    console.log(this);
+}
+playVideo();
+// Window {0: global, 1: global, window: Window, self: Window, document: document, name: "", location: Location, …}
+```
+
+```javascript
+// constructor function
+function Video(title){
+    this.title = title; // this is an empty object 
+    console.log(this);
+}
+const video = new Video('a')// create an empty objec with new operator
+```
+
+```javascript
+// function saw as regular function
+const video = {
+    title: 'a', 
+    tags: ['a', 'b', 'c'],
+    showTags() { // callback function insdie forEach saw as regular function
+        this.tags.forEach(function(tag) {
+            console.log(this);
+        });
+    }
+}
+video.showTags(); // this is windows object
+```
+
+```javascript
+// forEach function all you pass other argument other than call back function
+const video = {
+    title: 'a', 
+    tags: ['a', 'b', 'c'],
+    showTags() { // pass this into the callback function
+        this.tags.forEach(function(tag) {
+            console.log(this);
+        }, this);
+    }
+}
+video.showTags(); // video object
+```
+
+arrow functions inherit `this` value from the surrounding context
+
+```javascript
+// use arrow function could solve the problem above
+const video = {
+    title: 'a', 
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        this.tags.forEach(tag=>console.log(tag));
+    }
+}
+video.showTags();
+```
+
+
+
+### Factory function
+
+* each time we call the function, we create an object
+* like regular function using camel notation
+
+```javascript
+function createCircle(radius) {
+    return {
+        radius, 
+        draw() {
+            console.log('draw');
+        }
+    };
+}
+const circle = createCircle(1);
+```
+
+
+
+### Constructor function
+
+* the job of constructor function is to construct or create an object
+* use Pascal Notation: OneTwoThreeFour
+* the difference to factory function is that Pascal Notation, implicitly return object, new operator. 
+
+```javascript
+function Circle(radius) {
+    this.radius = radius; // add property to an empty object
+    this.draw = function() {
+        console.log('draw');
+    }
+}
+// with new operator, create an empty javascript object
+const circle = new Circle(1); 
+```
+
+
 
 ### Callback function
 
@@ -789,19 +1162,22 @@ inside a html body tag, the problem is
 
 we can create a object without class and define method inside of an object.
 
+Using `sister["parents"]` is called **bracket notation** (because of the brackets!) and using `sister.parents` is called **dot notation** (because of the dot!).
+
 ```javascript
 const user = {
     name: "John", 
     age: 18, 
     hobby: "Soccer", 
     isMarried: false,
+    //define the method
     thisMethod: function() {
-        alert(this.age); // this
+        alert(this.age); 
     },
 };
-// to call the attribue
-user.age
-user['age'] 
+// don't use number at the beginning of property
+user.age  // dot notation
+user['age'] // bracket notation
 user['a' + 'ge'] // you can use expresion 
 
 // to expand the user object
