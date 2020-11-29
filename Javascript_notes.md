@@ -514,6 +514,26 @@ counter.decrement();
 console.log(counter.value());
 ```
 
+```javascript
+// constructor
+function IceCream() {
+  this.scoops = 0;
+}
+
+// adds scoop to ice cream
+IceCream.prototype.addScoop = function() {
+  console.log("inside addScoop", this);
+  setTimeout(function() {
+    console.log("inside setTimeout: ", this)
+	this.scoops++;
+    console.log('scoop added!');
+  }, 500);
+};
+
+let dessert = new IceCream();
+dessert.addScoop();
+```
+
 
 
 ## This
@@ -970,6 +990,36 @@ const video = {
 video.showTags();
 ```
 
+```javascript
+////////////////////////////////////////
+
+let icecream = {
+	name:'icecream', 
+	price:11,
+	print_name: function(){
+		console.log(this)
+	}};
+	
+icecream.print_name();
+/////////////////////////////////////////
+let icecream = {
+	name:'icecream', 
+	price:11,
+	print_name: ()=>console.log(this),
+}
+icecream.print_name();
+
+///////////////////////////////////////////////
+let icecream = {
+	name:'icecream', 
+	price:11,
+	print_name: function() {
+		setTimeout(() => console.log(this), 500);
+	},
+}
+icecream.print_name();
+```
+
 
 
 ### Factory function
@@ -1124,6 +1174,21 @@ const square=(num) => num ** 2;
 add_two(square, square)(3,4); // return 25
 ```
 
+## Destructuring with Object Defaults Parameter
+
+```javascript
+function buildHouse({floors=1,color='red'}={}) {
+  return `Your house has ${floors.toString()} floor(s) with ${color} brick walls.`
+}
+
+console.log(buildHouse()); // Your house has 1 floor(s) with red brick walls.
+console.log(buildHouse({})); // Your house has 1 floor(s) with red brick walls.
+console.log(buildHouse({floors: 3, color: 'yellow'})); // Your house has 3 floor(s) with yellow brick walls.
+
+```
+
+
+
 ## Scope
 
 ### Closure
@@ -1257,7 +1322,55 @@ class Wizard extends Player {
 let obj06 = new Wizard('xiao', 'wizard')
 ```
 
-### 
+```javascript
+class Dessert {
+  constructor(calories = 250) {
+    this.calories = calories;
+  }
+}
+
+class IceCream extends Dessert {
+  constructor(flavor, calories, toppings = []) {
+    super(calories);
+    this.flavor = flavor;
+    this.toppings = toppings;
+  }
+  addTopping(topping) {
+    this.toppings.push(topping);
+  }
+}
+```
+
+## Subcliass
+
+```javascript
+class Vehicle {
+	constructor(color = 'blue', wheels = 4, horn = 'beep beep') {
+		this.color = color;
+		this.wheels = wheels;
+		this.horn = horn;
+	}
+
+	honkHorn() {
+		console.log(this.horn);
+	}
+}
+
+class Bicycle extends Vehicle {
+  constructor(color, wheels=2, horn='honk honk') {
+    super(color, wheels, horn);
+  }
+}
+
+
+const myVehicle = new Vehicle();
+myVehicle.honkHorn(); // beep beep
+const myBike = new Bicycle();
+myBike.honkHorn(); // honk honk
+
+```
+
+
 
 # Browser function
 
