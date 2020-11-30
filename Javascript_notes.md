@@ -1225,6 +1225,27 @@ inside a html body tag, the problem is
 
 # Object
 
+There are two method to create an object: literal notation, or constructor function. 
+
+```javascript
+// literal notation
+const myObject {};
+
+// constructor function 
+const myObject = new Object();
+```
+
+we can add and delete property to object
+
+```javascript
+// add and delete
+myObject.name = 'xiao'
+// delete property
+delete myObject.name
+```
+
+
+
 we can create a object without class and define method inside of an object.
 
 Using `sister["parents"]` is called **bracket notation** (because of the brackets!) and using `sister.parents` is called **dot notation** (because of the dot!).
@@ -1341,7 +1362,7 @@ class IceCream extends Dessert {
 }
 ```
 
-## Subcliass
+## Subclass
 
 ```javascript
 class Vehicle {
