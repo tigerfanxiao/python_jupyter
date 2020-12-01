@@ -266,7 +266,11 @@ x = y = 10
 
 // operator precedence
 console.log( now - 190 > now - 188) 
+```
 
+Logical operator
+
+```javascript
 // logical operator
 true && true // and
 true || false // or
@@ -285,6 +289,8 @@ true && true
 // not 
 !true
 ```
+
+
 
 ### Spread operator
 
@@ -468,7 +474,42 @@ console.log(Boolean(0)) // false
 typeof 'a' !== 'string'
 ```
 
-## closure
+### Scope
+
+*block* scope vs. *function* scope
+
+A function's runtime scope describes the variables available for use inside a given function. The code inside a function has access to:
+
+1. The function's arguments.
+2. Local variables declared within the function.
+3. Variables from its parent function's scope.
+4. Global variables.
+
+**runtime scope**. When a function is run, it creates a new runtime scope. This scope represents the *context* of the function, or more specifically, the set of variables available for the function to use.
+
+```javascript
+const myName = 'Andrew';
+// Global variable
+
+function introduceMyself() {
+
+  const you = 'student';
+  
+  // refer to variable contained in its parent function
+  // refer to variable in global
+  function introduce() {
+    console.log(`Hello, ${you}, I'm ${myName}!`);
+  }
+
+  return introduce();
+}
+```
+
+### Scope Chain
+
+Whenever your code attempts to access a variable during a function call, the JavaScript interpreter will always start off by looking within its own local variables. If the variable isn't found, the search will continue looking up what is called the **scope chain**
+
+### closure
 
 * closure is the combination of a function and the environment within which that function was declared. The environment consists of any local variables that were in scope at the time that the closure was created.
 * In JavaScript, all the function form closures.
@@ -738,13 +779,15 @@ Returns: ["chocolate frosted"]
 donuts array after calling the splice() method: ["glazed", "chocolate cruller", "creme de leche", "Boston creme", "glazed cruller"]
 ```
 
-### fill
+### fill()
 
 ```javascript
 new Array(100).fill('nemo')
 ```
 
-### filter
+### filter()
+
+like with `map()`, the `filter()` method returns a *new* array instead of modifying the original array
 
 ```javascript
 const array = [1,2,3,4,5];
@@ -756,7 +799,7 @@ const filterArray = array.filter(num=> {
 const filterArray = array.filter(num => num>2)
 ```
 
-### forEach
+### forEach()
 
 ```javascript
 words = ["cat", "in", "hat"];
@@ -770,9 +813,11 @@ words.forEach(function(word, num) {
 });
 ```
 
-### map
+### map()
 
-Using `forEach()` will not be useful if you want to permanently modify the original array. `forEach()` always returns `undefined`. However, creating a new array from an existing array is simple with the powerful `map()` method.
+Remember that the key difference between `forEach()` and `map()` is that `forEach()` doesn't return anything, while `map()` returns a new array with the values that are returned from the function
+
+**the `map()` method returns a new array; it does not modify the original array**
 
 ```javascript
 // map function will return a new array
@@ -853,6 +898,26 @@ my_string.toUpperCase();
 # Function
 
 * the difference between function declaration and function expression is hoisting
+
+### first-class function
+
+In JavaScript, functions are *first-class* functions. This means that you can do with a *function* just about anything that you can do with other elements, such as numbers, strings, objects, arrays, etc. JavaScript functions can:
+
+1. Be stored in variables
+2. Be returned from a function.
+3. Be passed as arguments into another function.
+
+### function is object
+
+```javascript
+function average(n1, n2, n3) {
+    return (n1 + n2 + n3)/3;
+}
+average.length // 3
+average.name // average
+```
+
+
 
 ### function declaration
 
@@ -1062,7 +1127,7 @@ const circle = new Circle(1);
 
 ### Callback function
 
-Functions as parameters
+A function that takes other functions as arguments (and/or *returns* a function, as we learned in the previous section) is known as a **higher-order function**
 
 Being able to store a function in a variable makes it really simple to pass the function into another function. A function that is passed into another function is called a **callback**.
 
@@ -1174,7 +1239,7 @@ const square=(num) => num ** 2;
 add_two(square, square)(3,4); // return 25
 ```
 
-## Destructuring with Object Defaults Parameter
+### Destructuring with Object Defaults Parameter
 
 ```javascript
 function buildHouse({floors=1,color='red'}={}) {
@@ -1187,9 +1252,9 @@ console.log(buildHouse({floors: 3, color: 'yellow'})); // Your house has 3 floor
 
 ```
 
+### Scope
 
 
-## Scope
 
 ### Closure
 
@@ -1294,6 +1359,8 @@ obj02 === obj00
 
 ### this
 
+**How the function is invoked determines the value of `this` inside the function**
+
 context tell you what object we are inside of
 
 ```javascript
@@ -1310,6 +1377,42 @@ const obj04 = {
     b: 11,
 }
 ```
+
+```javascript
+const car = {
+  numberOfDoors: 4,
+  drive: function () {
+     console.log(`Get in one of the ${this.numberOfDoors} doors, and let's go!`);
+  }
+};
+
+const letsRoll = car.drive;
+
+letsRoll(); // this is window object
+```
+
+## Object.keys() and Object.values()
+
+```javascript
+const dictionary = {
+  car: 'automobile',
+  apple: 'healthy snack',
+  cat: 'cute furry animal',
+  dog: 'best friend'
+};
+
+Object.keys(dictionary); // ['car', 'apple', 'cat', 'dog']
+// Object.values() is quite new
+Object.values(dictionary); // ['automobile', 'healthy snack', 'cute furry animal', 'best friend']
+
+// get keys by for in
+const result = []
+for (const word in dictionary) {
+    result.push(word)
+}
+```
+
+
 
 # Class
 
@@ -1412,7 +1515,14 @@ setTimeout(callback, time_miliseconds) // asynchronous function
 
 
 
+# Windows Object
 
+This `window` object has access to a ton of information about the page itself, including:
+
+- The page's URL (`window.location;`)
+- The vertical scroll position of the page (`window.scrollY'`)
+- Scrolling to a new location (`window.scroll(0, window.scrollY + 200);` to scroll 200 pixels down from the current location)
+- Opening a new web page (`window.open("https://www.udacity.com/");`)
 
 # Math
 
