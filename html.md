@@ -19,6 +19,7 @@ when submit email address, in url @ will be change to %40, as @ is special symbo
 <!--faxiao -->
 <form action="/submit" method="POST">
     First Name: <input type="text" name="firstname"><br>
+    input number: <input type="number" class="guess"><br>
     Email: <input type="email" name='email' required><br>
     Password: <input type="password" minlength=5 name="password">
     Birthday: <input type="date" name="birthday"><br>

@@ -1,4 +1,4 @@
-# Modern Javascript
+# Modern JavaScript
 
 * During development: simply use the latest Google Chrome!
 * During production: use **Babel** to transpile and polyfill your code (converting back to ES5 to ensure browser compatibility for all users)
@@ -47,9 +47,10 @@ format on save: checked
 ### vscode tricks
 
 1. select the content, ctrl + d, will selected all the same content
-2. move one line up, alt + up
-3. open another vertical window ctrl +\
-4. open terminal: ctrl + shift + `
+2. move one line up, alt + up arrow
+3. move current line down, alt + down arrow
+4. open another vertical window ctrl +\
+5. open terminal: ctrl + shift + `
 
 ## Chrome
 
@@ -78,13 +79,16 @@ multi-line comments
 
 ### Variables
 
-* There are two types of variable in Javascript: Primitive and Object
+* There are two types of variable in JavaScript: Primitive and Object
 
 * JavaScript has dynamic typing: we do not have to manually define the data type of the value stored in a variable. Instead, data types are determined automatically
 
 #### value types
 
 ```javascript
+// show type of variable 
+console.log(typeof true)
+
 // primitive
 // Datatype:Number -- Floating point numbers 
 let a = 10; 
@@ -106,8 +110,7 @@ Math.sqrt(-10)
 // Datatype: Symbol (ES2015) -- Value that is unique and cannot be changed 
 // Datatype: Bigint (ES2020) -- Larger integers than the Number type can hold
 
-// show value 
-console.log(typeof true)
+
 // object
 let me = {
     name: 'Jonas'
@@ -871,10 +874,9 @@ Number(12)
 let n = 10.0001
 n.toFixed(2) 
 
-// local string
+// local price format
 let price = 10000
 a.tolocalString("en-US")
-//
 ```
 
 
@@ -1711,21 +1713,33 @@ document.body.addEventListener('click', function () {
 });
 ```
 
-
+### querySelector
 
 ```javascript
-document // root 
+
 tag_obj = document.querySelector('tag name') // return a tag object
+tag_obj = document.querySelector('.classname')
+tag_obj = document.querySelector('#id')
+
+// set attribute
 tag_obj.style.color = 'red' // set style attribute
+body_obj.style.backgroundColor = 'green';
 tag_obj.style.width = '300px'
 tag_obj.classList.add('fadeIn') // add action
 tag_obj.textContent = 'this is xiao' // set content
+
+// input tag
+tag_obj.value // get the input value
+
 
 ```
 
 ## DOM event
 
 ```javascript
+// click event
+tag_obj.addEventListener('click', callback)
+
 img.src = 'dog.jpg' // load img is asynchronous
 img.addEventListener('load', callback)
 ```
@@ -1734,7 +1748,7 @@ img.addEventListener('load', callback)
 
 # Thread
 
-Thread of Excution: Part of excution context that actually execute the code in computer's CPU
+Thread of Execution: Part of execution context that actually execute the code in computer's CPU
 
 # Debuging
 
