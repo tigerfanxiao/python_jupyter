@@ -1248,6 +1248,16 @@ add_two(square, square)(3,4); // return 25
 ### Destructuring with Object Defaults Parameter
 
 ```javascript
+const [x,y, z] = [2, 3, 4]
+console.log(x, y, z)
+
+// 
+const [x, y] = [2, 3, 4]
+const [x, , z]= [2, 3, 4]
+
+// 
+[x, y] = [y, z]
+
 function buildHouse({floors=1,color='red'}={}) {
   return `Your house has ${floors.toString()} floor(s) with ${color} brick walls.`
 }

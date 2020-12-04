@@ -9,6 +9,12 @@ pip3 install flask
 pip3 list
 ```
 
+```shell
+pip3 freeze > requirements.txt
+pip3 install -r requirements.txt
+
+```
+
 
 
 ## Create virtual env
@@ -28,11 +34,19 @@ On linux
 ```shell
 # you may need to install python-env
 sudo apt-get install python3-env
+sudo apt-get install tree # to view the file structure
+
+# create env
 python3 -m venv venv
-sudo apt-get install tree # to view the file structure 
 tree venv -L 3 # view 3 levels file tree
 chmod 744 ./ven/bin/active # change permisson to excute
 . /venv/bin/activate # activate the environment
+```
+
+with anaconda
+
+```javascript
+conda create -name my_env python=3.7
 ```
 
 
@@ -52,7 +66,7 @@ def hello_world():
 On Linux
 
 ```shell
-$ export FLASK_APP=hello.py
+export FLASK_APP=hello.py
 # make suer you pwd is in project foler
 flask run
 ```
@@ -81,6 +95,19 @@ flask will look for the folder named templates
 def hello_world():
     return render_template('index.html') # 
 ```
+
+### render sitemap
+
+```python
+from flask import send_from_directory
+
+@app.route('/robots.txt')
+@app.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
+```
+
+
 
 ### static files
 
