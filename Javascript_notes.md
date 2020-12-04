@@ -58,6 +58,10 @@ format on save: checked
 
 # Fundamentals
 
+## Javascript Engine
+
+
+
 ### link to javascript
 
 ```html
@@ -1256,6 +1260,30 @@ console.log(buildHouse({floors: 3, color: 'yellow'})); // Your house has 3 floor
 
 ### Scope
 
+A function's runtime scope describes the variables available for use inside a given function. The code inside a function has access to:
+
+1. The function's arguments.
+2. Local variables declared within the function.
+3. Variables from its parent function's scope.
+4. Global variables.
+
+```javascript
+const init = function () {
+  let playing = true; // playing can only be referred inside the init function
+
+// playing is not accessible outside the function
+console.log(playing)
+```
+
+if the variable is declared outside of function, we can access it inside the function
+
+```javascript
+let playing;
+const init = function (){
+    playing = true;
+}
+```
+
 
 
 ### Closure
@@ -1716,16 +1744,19 @@ document.body.addEventListener('click', function () {
 ### querySelector
 
 ```javascript
-
+// querySelector is only return the first one matched tag
 tag_obj = document.querySelector('tag name') // return a tag object
 tag_obj = document.querySelector('.classname')
 tag_obj = document.querySelector('#id')
+tag_obj = document.getElementById('id') // a little faster than querySelector
+
 
 // set attribute
 tag_obj.style.color = 'red' // set style attribute
 body_obj.style.backgroundColor = 'green';
-tag_obj.style.width = '300px'
-tag_obj.classList.add('fadeIn') // add action
+tag_obj.style.width = '300px';
+tag_obj.style.display = 'block' // none: hide, blcok: show
+
 tag_obj.textContent = 'this is xiao' // set content
 
 // input tag
@@ -1734,7 +1765,29 @@ tag_obj.value // get the input value
 
 ```
 
+### querySelectorAll
+
+```javascript
+// return NodeList
+document.querySelectorAll('btn')
+```
+
+### mange class List
+
+Javascript will not remove what does not exist and add what already exists
+
+```javascript
+tag_obj.classList.add('fadeIn') // add class fadeinn
+tag_obj.classList.remove('classname1', 'classname2') // not use .classname here
+tag_obj.classList.contains('classname'); 
+tag_obj.classList.toogle('classname') // if exists, remove; if not exists, add
+```
+
+
+
 ## DOM event
+
+### Mouse event
 
 ```javascript
 // click event
@@ -1742,6 +1795,16 @@ tag_obj.addEventListener('click', callback)
 
 img.src = 'dog.jpg' // load img is asynchronous
 img.addEventListener('load', callback)
+```
+
+### Keyboard event
+
+keyboard event is global event, so it belongs to document object
+
+* There is `keydown`, `keypress`, `keyup`
+
+```javascript
+document.addEventListener('keydown', callback)
 ```
 
 
